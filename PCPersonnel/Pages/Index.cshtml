@@ -2,6 +2,7 @@
 @model PCPersonnel.Pages.IndexModel
 @{
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <header>
     <h1>PC Personnel</h1>
 </header>
@@ -9,6 +10,6 @@
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="ExcelFile" />
 
-        <button type="submit">Submit</button>
+        <button type="submit">Mettre à jour</button>
     </form>
 </main>
