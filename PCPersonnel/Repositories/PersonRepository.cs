@@ -65,41 +65,25 @@ namespace PCPersonnel.Repositories
             result.LastName = this.ExcelFileRepository.GetStringValue(firstNameCell, document);
             result.FirstName = this.ExcelFileRepository.GetStringValue(lastNameCell, document);
 
-            var phoneNumberCell = FindCellByColumn(r, "C");
-            if (phoneNumberCell != null)
+            Action<string, Action<string>> assignColumn = (columnID, setter) =>
             {
-                result.PhoneNumber = this.ExcelFileRepository.GetStringValue(phoneNumberCell, document);
-            }
+                var cell = FindCellByColumn(r, columnID);
+                if (cell != null)
+                {
+                    string v = this.ExcelFileRepository.GetStringValue(cell, document);
+                    setter(v);
+                }
+            };
 
-            var emailCell = FindCellByColumn(r, "D");
-            if (emailCell != null)
-            {
-                result.Email = this.ExcelFileRepository.GetStringValue(emailCell, document);
-            }
-
-            var avsCell = FindCellByColumn(r, "E");
-            if (avsCell != null)
-            {
-                result.AVSNumber = this.ExcelFileRepository.GetStringValue(avsCell, document);
-            }
-
-            var zipCodeCell = FindCellByColumn(r, "F");
-            if (zipCodeCell != null)
-            {
-                result.ZipCode = this.ExcelFileRepository.GetStringValue(zipCodeCell, document);
-            }
-
-            var cityCell = FindCellByColumn(r, "G");
-            if (cityCell != null)
-            {
-                result.City = this.ExcelFileRepository.GetStringValue(cityCell, document);
-            }
-
-            var cantonCell = FindCellByColumn(r, "H");
-            if (cantonCell != null)
-            {
-                result.Canton = this.ExcelFileRepository.GetStringValue(cantonCell, document);
-            }
+            assignColumn("C", v => result.PhoneNumber = v);
+            assignColumn("D", v => result.Email = v);
+            assignColumn("E", v => result.AVSNumber = v);
+            assignColumn("F", v => result.ZipCode = v);
+            assignColumn("G", v => result.City = v);
+            assignColumn("H", v => result.Canton = v);
+            assignColumn("J", v => result.Assignment = v);
+            assignColumn("K", v => result.Function = v);
+            assignColumn("L", v => result.Rank = v);
 
             return result;
         }

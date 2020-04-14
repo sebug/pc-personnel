@@ -17,6 +17,10 @@ namespace PCPersonnel.Models
         public string City { get; set; }
         public string Canton { get; set; }
 
+        public string Assignment { get; set; }
+        public string Function { get; set; }
+        public string Rank { get; set; }
+
 
         public bool IsEmpty
         {
