@@ -12,5 +12,6 @@
     <Folder Include="Pages\Shared\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
