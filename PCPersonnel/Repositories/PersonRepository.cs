@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DocumentFormat.OpenXml.Packaging;
 using PCPersonnel.Models;
 
 namespace PCPersonnel.Repositories
@@ -19,10 +20,12 @@ namespace PCPersonnel.Repositories
 
         public List<Person> GetAll()
         {
-            return this.ExcelFileRepository.ReadExcelFile<List<Person>>(spreadsheetDocument =>
-            {
-                return new List<Person>();
-            });
+            return this.ExcelFileRepository.ReadExcelFile(this.ReadPeopleFromSpreadsheet);
+        }
+
+        private List<Person> ReadPeopleFromSpreadsheet(SpreadsheetDocument spreadsheetDocument)
+        {
+            return new List<Person>();
         }
     }
 }
