@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  pcpersonnel:
+    image: sebug/pc-personnel:453
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "9085:80"
+
+
