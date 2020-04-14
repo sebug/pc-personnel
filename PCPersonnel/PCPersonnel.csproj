@@ -14,4 +14,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.1" />
+  </ItemGroup>
 </Project>
