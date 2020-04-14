@@ -19,7 +19,10 @@ namespace PCPersonnel.Repositories
 
         public List<Person> GetAll()
         {
-            return new List<Person>();
+            return this.ExcelFileRepository.ReadExcelFile<List<Person>>(spreadsheetDocument =>
+            {
+                return new List<Person>();
+            });
         }
     }
 }
