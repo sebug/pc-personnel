@@ -35,6 +35,15 @@ namespace PCPersonnel.Models
 
         public bool? HasDriversLicense { get; set; }
 
+        public string Status { get; set; }
+
+        public string Mission { get; set; }
+        public string PlaceOfConvocation { get; set; }
+        public string MissionResponsible { get; set; }
+        public string SecondaryMissionResponsible { get; set; }
+
+        public string DietaryRestrictions { get; set; }
+
         public bool IsEmpty
         {
             get

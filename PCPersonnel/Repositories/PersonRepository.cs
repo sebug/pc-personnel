@@ -104,6 +104,12 @@ namespace PCPersonnel.Repositories
                     }
                 }
             });
+            assignColumn("X", v => result.Status = v);
+            assignColumn("Y", v => result.Mission = v);
+            assignColumn("Z", v => result.MissionResponsible = v);
+            assignColumn("AA", v => result.SecondaryMissionResponsible = v);
+            assignColumn("AB", v => result.PlaceOfConvocation = v);
+            assignColumn("AC", v => result.DietaryRestrictions = v);
 
             return result;
         }
