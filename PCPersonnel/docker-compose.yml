@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  pcpersonnel:
+    image: ${DOCKER_REGISTRY-}pcpersonnel
+    build:
+      context: .
+      dockerfile: ./Dockerfile
