@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   pcpersonnel:
-    image: sebug/pc-personnel:453
+    image: sebug/pc-personnel:469
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
