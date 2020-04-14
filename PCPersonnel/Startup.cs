@@ -37,8 +37,6 @@ namespace PCPersonnel
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseStaticFiles();
