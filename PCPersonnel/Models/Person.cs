@@ -42,7 +42,7 @@ namespace PCPersonnel.Models
         public string MissionResponsible { get; set; }
         public string SecondaryMissionResponsible { get; set; }
 
-        public string DietaryRestrictions { get; set; }
+        public string KitchenInfo { get; set; }
 
         public bool IsEmpty
         {

@@ -109,7 +109,8 @@ namespace PCPersonnel.Repositories
             assignColumn("Z", v => result.MissionResponsible = v);
             assignColumn("AA", v => result.SecondaryMissionResponsible = v);
             assignColumn("AB", v => result.PlaceOfConvocation = v);
-            assignColumn("AC", v => result.DietaryRestrictions = v);
+            assignColumn("AC", v => result.KitchenInfo = v);
+
 
             return result;
         }
