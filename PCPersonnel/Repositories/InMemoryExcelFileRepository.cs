@@ -2,7 +2,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace PCPersonnel.Repositories
 {
@@ -38,6 +40,32 @@ namespace PCPersonnel.Repositories
                 using (var spreadsheet = SpreadsheetDocument.Open(ms, false))
                 {
                     return reader(spreadsheet);
+                }
+            }
+        }
+
+        public string GetStringValue(Cell c, SpreadsheetDocument document)
+        {
+            // If the content of the first cell is stored as a shared string, get the text of the first cell
+            // from the SharedStringTablePart and return it. Otherwise, return the string value of the cell.
+            if (c.DataType != null && c.DataType.Value ==
+                CellValues.SharedString)
+            {
+                SharedStringTablePart shareStringPart = document.WorkbookPart.
+            GetPartsOfType<SharedStringTablePart>().First();
+                SharedStringItem[] items = shareStringPart.
+            SharedStringTable.Elements<SharedStringItem>().ToArray();
+                return items[int.Parse(c.CellValue.Text)].InnerText;
+            }
+            else
+            {
+                if (c.CellValue != null)
+                {
+                    return c.CellValue.Text;
+                }
+                else
+                {
+                    return c.InnerText;
                 }
             }
         }
