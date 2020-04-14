@@ -11,22 +11,19 @@ namespace PCPersonnel.Pages
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        IFormFile ExcelFile { get; set; }
-
         public void OnGet()
         {
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostAsync(IFormFile excelFile)
         {
-            if (this.ExcelFile == null)
+            if (excelFile == null)
             {
                 return;
             }
             using (var ms = new MemoryStream())
             {
-                await this.ExcelFile.CopyToAsync(ms);
+                await excelFile.CopyToAsync(ms);
             }
         }
     }
