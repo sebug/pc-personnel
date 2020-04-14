@@ -13,6 +13,11 @@ namespace PCPersonnel.Models
         public string Email { get; set; }
         public string AVSNumber { get; set; }
 
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Canton { get; set; }
+
+
         public bool IsEmpty
         {
             get

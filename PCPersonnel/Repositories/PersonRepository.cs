@@ -83,6 +83,24 @@ namespace PCPersonnel.Repositories
                 result.AVSNumber = this.ExcelFileRepository.GetStringValue(avsCell, document);
             }
 
+            var zipCodeCell = FindCellByColumn(r, "F");
+            if (zipCodeCell != null)
+            {
+                result.ZipCode = this.ExcelFileRepository.GetStringValue(zipCodeCell, document);
+            }
+
+            var cityCell = FindCellByColumn(r, "G");
+            if (cityCell != null)
+            {
+                result.City = this.ExcelFileRepository.GetStringValue(cityCell, document);
+            }
+
+            var cantonCell = FindCellByColumn(r, "H");
+            if (cantonCell != null)
+            {
+                result.Canton = this.ExcelFileRepository.GetStringValue(cantonCell, document);
+            }
+
             return result;
         }
 
