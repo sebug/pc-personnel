@@ -71,6 +71,12 @@ namespace PCPersonnel.Repositories
                 result.PhoneNumber = this.ExcelFileRepository.GetStringValue(phoneNumberCell, document);
             }
 
+            var emailCell = FindCellByColumn(r, "D");
+            if (emailCell != null)
+            {
+                result.Email = this.ExcelFileRepository.GetStringValue(emailCell, document);
+            }
+
             return result;
         }
 
