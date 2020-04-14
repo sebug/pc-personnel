@@ -27,6 +27,14 @@ namespace PCPersonnel.Models
         public string InternalDomain { get; set; }
         public string Classification { get; set; }
 
+        public string Locale { get; set; }
+        // Whatever that means
+        public string HealthNetwork { get; set; }
+
+        public string SickStatus { get; set; }
+
+        public bool? HasDriversLicense { get; set; }
+
         public bool IsEmpty
         {
             get

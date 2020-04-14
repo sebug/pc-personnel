@@ -87,7 +87,23 @@ namespace PCPersonnel.Repositories
             assignColumn("M", v => result.IsEM = v == "EM");
             assignColumn("N", v => result.InternalDomain = v);
             assignColumn("O", v => result.Classification = v);
-
+            assignColumn("P", v => result.Locale = v);
+            assignColumn("Q", v => result.HealthNetwork = v);
+            assignColumn("R", v => result.SickStatus = v);
+            assignColumn("T", v =>
+            {
+                if (v != null)
+                {
+                    if (v.Equals("OUI", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        result.HasDriversLicense = true;
+                    }
+                    else if (v.Equals("NON", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        result.HasDriversLicense = false;
+                    }
+                }
+            });
 
             return result;
         }
