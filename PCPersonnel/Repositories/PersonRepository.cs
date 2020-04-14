@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using PCPersonnel.Models;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PCPersonnel.Repositories
 {
@@ -49,22 +50,45 @@ namespace PCPersonnel.Repositories
 
         private Person ReadPerson(Row r, SpreadsheetDocument document)
         {
-            var firstCell = r.Descendants<Cell>().FirstOrDefault();
-            if (firstCell == null)
+            var firstNameCell = FindCellByColumn(r, "A");
+            if (firstNameCell == null)
             {
                 return null;
             }
-            var secondCell = r.Descendants<Cell>().Skip(1).FirstOrDefault();
-            if (secondCell == null)
+            var lastNameCell = FindCellByColumn(r, "B");
+            if (lastNameCell == null)
             {
                 return null;
             }
             var result = new Person();
 
-            result.LastName = this.ExcelFileRepository.GetStringValue(firstCell, document);
-            result.FirstName = this.ExcelFileRepository.GetStringValue(secondCell, document);
+            result.LastName = this.ExcelFileRepository.GetStringValue(firstNameCell, document);
+            result.FirstName = this.ExcelFileRepository.GetStringValue(lastNameCell, document);
+
+            var phoneNumberCell = FindCellByColumn(r, "C");
+            if (phoneNumberCell != null)
+            {
+                result.PhoneNumber = this.ExcelFileRepository.GetStringValue(phoneNumberCell, document);
+            }
 
             return result;
+        }
+
+        private Regex _cellReferenceRegex = new Regex("(?<column>[A-Z]+)(?<row>\\d+)", RegexOptions.Compiled);
+
+        private Cell FindCellByColumn(Row r, string column)
+        {
+            var cells = r.Descendants<Cell>();
+            return cells.FirstOrDefault(c =>
+            {
+                var m = this._cellReferenceRegex.Match(c.CellReference.Value);
+                if (!m.Success)
+                {
+                    return false;
+                }
+                string col = m.Groups["column"].Value;
+                return col == column;
+            });
         }
     }
 }
