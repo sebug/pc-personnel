@@ -84,6 +84,10 @@ namespace PCPersonnel.Repositories
             assignColumn("J", v => result.Assignment = v);
             assignColumn("K", v => result.Function = v);
             assignColumn("L", v => result.Rank = v);
+            assignColumn("M", v => result.IsEM = v == "EM");
+            assignColumn("N", v => result.InternalDomain = v);
+            assignColumn("O", v => result.Classification = v);
+
 
             return result;
         }

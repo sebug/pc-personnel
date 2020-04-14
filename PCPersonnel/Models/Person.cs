@@ -21,6 +21,11 @@ namespace PCPersonnel.Models
         public string Function { get; set; }
         public string Rank { get; set; }
 
+        // Well this one is completely custom
+        public bool IsEM { get; set; }
+
+        public string InternalDomain { get; set; }
+        public string Classification { get; set; }
 
         public bool IsEmpty
         {
