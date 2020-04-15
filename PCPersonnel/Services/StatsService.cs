@@ -2,6 +2,7 @@
 using PCPersonnel.Models;
 using PCPersonnel.Repositories;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PCPersonnel.Services
 {
@@ -14,7 +15,7 @@ namespace PCPersonnel.Services
             this._personRepository = personRepository;
         }
 
-
+        private readonly Regex _numbersOnlyRegex = new Regex("^\\d+$");
 
         public StatsByDate GetStatsByDate(DateTime date)
         {
@@ -31,6 +32,7 @@ namespace PCPersonnel.Services
             var presents = personsAndPresence
                 .Where(pp => pp.Presence != null && pp.Presence.Called &&
                 (String.IsNullOrEmpty(pp.Presence.Presence) ||
+                _numbersOnlyRegex.IsMatch(pp.Presence.Presence) ||
                 pp.Presence.Presence.Equals("P", StringComparison.InvariantCultureIgnoreCase)));
 
             var rests = personsAndPresence
