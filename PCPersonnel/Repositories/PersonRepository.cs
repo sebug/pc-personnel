@@ -60,7 +60,7 @@ namespace PCPersonnel.Repositories
 
             var peopleRows = worksheet.Descendants<Row>().Skip(25);
 
-            var result = peopleRows.Select(r => this.ReadPerson(r, document))
+            var result = peopleRows.Select(r => this.ReadPerson(r, document, columnToDate))
                 .Where(p => p != null && !p.IsEmpty)
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
@@ -69,7 +69,7 @@ namespace PCPersonnel.Repositories
             return result;
         }
 
-        private Person ReadPerson(Row r, SpreadsheetDocument document)
+        private Person ReadPerson(Row r, SpreadsheetDocument document, IReadOnlyDictionary<string, DateTime> dateColumns)
         {
             var firstNameCell = FindCellByColumn(r, "A");
             if (firstNameCell == null)
@@ -132,6 +132,29 @@ namespace PCPersonnel.Repositories
             assignColumn("AB", v => result.PlaceOfConvocation = v);
             assignColumn("AC", v => result.KitchenInfo = v);
 
+            var dateKvps = dateColumns.OrderBy(kvp => kvp.Value).ToList();
+            result.Presences = new List<PresenceEntry>();
+            foreach (var dateKvp in dateKvps)
+            {
+                var calledCell = FindCellByColumn(r, dateKvp.Key);
+                var presenceEntry = new PresenceEntry()
+                {
+                    Date = dateKvp.Value
+                };
+                if (calledCell != null)
+                {
+                    string calledString = this.ExcelFileRepository.GetStringValue(calledCell, document);
+                    presenceEntry.Called = calledString != null && calledString.Equals("x", StringComparison.InvariantCultureIgnoreCase);
+
+                    var presentCell = FindCellByColumn(r, NextColumn(dateKvp.Key));
+                    if (presentCell != null)
+                    {
+                        presenceEntry.Presence = this.ExcelFileRepository.GetStringValue(presentCell, document);
+                    }
+                }
+                result.Presences.Add(presenceEntry);
+            }
+
 
             return result;
         }
@@ -151,6 +174,38 @@ namespace PCPersonnel.Repositories
                 string col = m.Groups["column"].Value;
                 return col == column;
             });
+        }
+
+        private string NextColumn(string column)
+        {
+            return this.ExcelColumnFromNumber(this.NumberFromExcelColumn(column) + 1);
+        }
+
+        private int NumberFromExcelColumn(string column)
+        {
+            int retVal = 0;
+            string col = column.ToUpper();
+            for (int iChar = col.Length - 1; iChar >= 0; iChar--)
+            {
+                char colPiece = col[iChar];
+                int colNum = colPiece - 64;
+                retVal = retVal + colNum * (int)Math.Pow(26, col.Length - (iChar + 1));
+            }
+            return retVal;
+        }
+
+        private string ExcelColumnFromNumber(int column)
+        {
+            string columnString = "";
+            decimal columnNumber = column;
+            while (columnNumber > 0)
+            {
+                decimal currentLetterNumber = (columnNumber - 1) % 26;
+                char currentLetter = (char)(currentLetterNumber + 65);
+                columnString = currentLetter + columnString;
+                columnNumber = (columnNumber - (currentLetterNumber + 1)) / 26;
+            }
+            return columnString;
         }
     }
 }
