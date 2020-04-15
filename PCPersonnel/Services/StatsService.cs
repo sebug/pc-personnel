@@ -14,6 +14,8 @@ namespace PCPersonnel.Services
             this._personRepository = personRepository;
         }
 
+
+
         public StatsByDate GetStatsByDate(DateTime date)
         {
             var result = new StatsByDate();
@@ -28,8 +30,8 @@ namespace PCPersonnel.Services
 
             var presents = personsAndPresence
                 .Where(pp => pp.Presence != null && pp.Presence.Called &&
-                pp.Presence.Presence != null &&
-                pp.Presence.Presence.Equals("P", StringComparison.InvariantCultureIgnoreCase));
+                (String.IsNullOrEmpty(pp.Presence.Presence) ||
+                pp.Presence.Presence.Equals("P", StringComparison.InvariantCultureIgnoreCase)));
 
             var rests = personsAndPresence
                 .Where(pp => pp.Presence != null && pp.Presence.Called &&
