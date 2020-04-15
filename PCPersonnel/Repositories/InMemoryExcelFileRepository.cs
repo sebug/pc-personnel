@@ -69,5 +69,16 @@ namespace PCPersonnel.Repositories
                 }
             }
         }
+
+        public DateTime? GetDateValue(Cell c, SpreadsheetDocument document)
+        {
+            string s = this.GetStringValue(c, document);
+            int i;
+            if (s == null || !int.TryParse(s, out i))
+            {
+                return null;
+            }
+            return DateTime.FromOADate(i);
+        }
     }
 }

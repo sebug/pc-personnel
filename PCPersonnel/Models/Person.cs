@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PCPersonnel.Models
 {
     public class Person
@@ -43,6 +45,8 @@ namespace PCPersonnel.Models
         public string SecondaryMissionResponsible { get; set; }
 
         public string KitchenInfo { get; set; }
+
+        public List<PresenceEntry> Presences { get; set; }
 
         public bool IsEmpty
         {

@@ -37,6 +37,27 @@ namespace PCPersonnel.Repositories
 
             WorksheetPart worksheetPart = (WorksheetPart)document.WorkbookPart.GetPartById(firstSheet.Id);
             var worksheet = worksheetPart.Worksheet;
+
+            var dateHeadingsRow = worksheet.Descendants<Row>().Skip(23).First();
+
+            var dateHeadingCells = dateHeadingsRow.Descendants<Cell>().ToList();
+
+            Dictionary<string, DateTime> columnToDate = new Dictionary<string, DateTime>();
+
+            foreach (var cell in dateHeadingCells)
+            {
+                DateTime? dh = this.ExcelFileRepository.GetDateValue(cell, document);
+                if (dh.HasValue)
+                {
+                    var m = this._cellReferenceRegex.Match(cell.CellReference);
+                    if (m.Success)
+                    {
+                        string column = m.Groups["column"].Value;
+                        columnToDate[column] = dh.Value;
+                    }
+                }
+            }
+
             var peopleRows = worksheet.Descendants<Row>().Skip(25);
 
             var result = peopleRows.Select(r => this.ReadPerson(r, document))
