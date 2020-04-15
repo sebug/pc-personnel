@@ -38,14 +38,27 @@ namespace PCPersonnel.Services
             var rests = personsAndPresence
                 .Where(pp => pp.Presence != null && pp.Presence.Called &&
                 pp.Presence.Presence != null &&
-                pp.Presence.Presence.IndexOf("R", StringComparison.InvariantCultureIgnoreCase) >= 0);
+                pp.Presence.Presence.Equals("R", StringComparison.InvariantCultureIgnoreCase));
+
+            var quarantines = personsAndPresence
+                .Where(pp => pp.Presence != null && pp.Presence.Called &&
+                pp.Presence.Presence != null &&
+                pp.Presence.Presence.IndexOf("Q", StringComparison.InvariantCultureIgnoreCase) >= 0);
 
             result.PresentCount = presents
                 .Count();
             result.RestCount = rests.Count();
+            result.QuarantineCount = quarantines.Count();
 
             result.MissionCount = presents.GroupBy(pp => pp.Person.Mission)
-                .ToDictionary(g => g.Key, g => g.Count());
+                .ToDictionary(g => g.Key, g =>
+                {
+                    if (g.Key.IndexOf("Quarantaine", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        return result.QuarantineCount;
+                    }
+                    return g.Count();
+                });
 
             return result;
         }

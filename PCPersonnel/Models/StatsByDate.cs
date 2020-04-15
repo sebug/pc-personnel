@@ -8,6 +8,7 @@ namespace PCPersonnel.Models
         public string FormattedDate { get; set; }
         public int PresentCount { get; set; }
         public int RestCount { get; set; }
+        public int QuarantineCount { get; set; }
         public Dictionary<string, int> MissionCount { get; set; }
     }
 }
