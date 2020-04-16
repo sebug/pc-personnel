@@ -2,10 +2,12 @@ version: '3.4'
 
 services:
   pcpersonnel:
-    image: sebug/pc-personnel:490
+    image: sebug/pc-personnel:494
     env_file:
       - ./pcpersonnel.env
       - ./connectionstring.env
+    networks:
+      - postgres
     ports:
       - "9085:80"
 
