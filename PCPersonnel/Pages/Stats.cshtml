@@ -1,0 +1,46 @@
+﻿@page
+@model PCPersonnel.Pages.StatsModel
+@{
+}
+@if (this.Model.StatsByDate != null)
+{
+    <header>
+        <h1>Statistiques pour @this.Model.StatsByDate.FormattedDate</h1>
+    </header>
+    <main class="stats">
+        <section>
+            <h2>Totaux</h2>
+            <dl>
+                <dt>Présents</dt>
+                <dd>@this.Model.StatsByDate.PresentCount</dd>
+                <dt>Repos</dt>
+                <dd>@this.Model.StatsByDate.RestCount</dd>
+                <dt>Quarantaine</dt>
+                <dd>@this.Model.StatsByDate.QuarantineCount</dd>
+            </dl>
+        </section>
+        <section>
+            <h2>Détails</h2>
+            @if (this.Model.StatsByDate.MissionCount != null)
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mission</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var mission in this.Model.StatsByDate.MissionCount)
+                        {
+                            <tr>
+                                <td>@mission.Key</td>
+                                <td>@mission.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </section>
+    </main>
+}

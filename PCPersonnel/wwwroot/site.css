@@ -16,16 +16,25 @@ main.person-details section.presence {
     grid-column-end: 3;
 }
 
-main.person-details dl {
+dl {
     display: grid;
     grid-template-columns: auto 1fr;
 }
 
-main.person-details dt {
+dt {
     grid-column: 1;
     font-weight: bold;
 }
 
-main.person-details dd {
+dd {
     grid-column: 2;
+}
+
+main.stats {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+main.stats section {
+    grid-column: auto;
 }
