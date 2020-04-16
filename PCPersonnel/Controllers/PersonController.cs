@@ -30,5 +30,12 @@ namespace PCPersonnel.Controllers
 
             return people;
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public Person Get(string id)
+        {
+            return this._personRepository.GetByAVSNumber(id);
+        }
     }
 }
