@@ -1,0 +1,16 @@
+do $$
+BEGIN
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'Vehicle') THEN
+
+CREATE SEQUENCE vehicle_sequence;
+CREATE TABLE "Vehicle" (
+"VehicleID" INT NOT NULL DEFAULT nextval('vehicle_sequence') PRIMARY KEY,
+"Code" VARCHAR(50) NOT NULL,
+"Mission" VARCHAR(255) NULL
+);
+END IF;
+END;
+$$;
