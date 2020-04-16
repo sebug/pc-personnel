@@ -15,5 +15,7 @@ namespace PCPersonnel.Repositories
         string GetStringValue(Cell c, SpreadsheetDocument document);
 
         DateTime? GetDateValue(Cell c, SpreadsheetDocument document);
+
+        void RegisterExcelFileUploadedCallback(Action<byte[]> newExcelFile);
     }
 }

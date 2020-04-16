@@ -31,7 +31,7 @@ namespace PCPersonnel
             services.AddRazorPages();
 
             services.AddSingleton<IExcelFileRepository, InMemoryExcelFileRepository>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddSingleton<IPersonRepository, PersonRepository>();
             services.AddTransient<IStatsService, StatsService>();
         }
 

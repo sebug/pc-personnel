@@ -11,14 +11,15 @@ namespace PCPersonnel.Repositories
     public class PersonRepository : IPersonRepository
     {
         private IExcelFileRepository ExcelFileRepository { get; }
+        private List<Person> PersonCache { get; set; }
 
         public PersonRepository(IExcelFileRepository excelFileRepository)
         {
             this.ExcelFileRepository = excelFileRepository;
-        }
-
-        public PersonRepository()
-        {
+            this.ExcelFileRepository.RegisterExcelFileUploadedCallback(bytes =>
+            {
+                this.PersonCache = null;
+            });
         }
 
         public List<Person> GetAll()
@@ -28,6 +29,10 @@ namespace PCPersonnel.Repositories
 
         private List<Person> ReadPeopleFromSpreadsheet(SpreadsheetDocument document)
         {
+            if (this.PersonCache != null)
+            {
+                return this.PersonCache;
+            }
             var sheets = document.WorkbookPart.Workbook.Descendants<Sheet>();
             if (!sheets.Any())
             {
@@ -65,6 +70,8 @@ namespace PCPersonnel.Repositories
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
                 .ToList();
+
+            this.PersonCache = result;
 
             return result;
         }

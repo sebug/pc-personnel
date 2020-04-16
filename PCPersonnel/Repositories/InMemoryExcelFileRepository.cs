@@ -5,12 +5,14 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace PCPersonnel.Repositories
 {
     public class InMemoryExcelFileRepository : IExcelFileRepository
     {
         private byte[] FileContent { get; set; }
+        private List<Action<byte[]>> ExcelFilesUpdatedCallbacks { get; set; } = new List<Action<byte[]>>();
 
         public InMemoryExcelFileRepository()
         {
@@ -26,6 +28,13 @@ namespace PCPersonnel.Repositories
             {
                 await excelFile.CopyToAsync(ms);
                 this.FileContent = ms.ToArray();
+                if (this.ExcelFilesUpdatedCallbacks != null)
+                {
+                    foreach (var cb in this.ExcelFilesUpdatedCallbacks)
+                    {
+                        cb(this.FileContent);
+                    }
+                }
             }
         }
 
@@ -79,6 +88,11 @@ namespace PCPersonnel.Repositories
                 return null;
             }
             return DateTime.FromOADate(i);
+        }
+
+        public void RegisterExcelFileUploadedCallback(Action<byte[]> newFileUploadedCallback)
+        {
+            this.ExcelFilesUpdatedCallbacks.Add(newFileUploadedCallback);
         }
     }
 }

@@ -6,7 +6,7 @@ using PCPersonnel.Services;
 namespace PCPersonnel.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StatsController : ControllerBase
     {
         private readonly IStatsService _statsService;
