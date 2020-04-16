@@ -7,5 +7,7 @@ namespace PCPersonnel.Repositories
     public interface IPersonRepository
     {
         List<Person> GetAll();
+
+        Person GetByAVSNumber(string avsNumber);
     }
 }

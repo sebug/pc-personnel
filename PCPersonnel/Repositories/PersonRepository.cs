@@ -214,5 +214,20 @@ namespace PCPersonnel.Repositories
             }
             return columnString;
         }
+
+        public Person GetByAVSNumber(string avsNumber)
+        {
+            if (avsNumber == null)
+            {
+                throw new ArgumentNullException(nameof(avsNumber));
+            }
+            var people = this.GetAll();
+            if (people == null)
+            {
+                return null;
+            }
+            string normalizedAVSNumber = avsNumber.Replace(".", String.Empty);
+            return people.FirstOrDefault(p => p.AVSNumber?.Replace(".", String.Empty) == normalizedAVSNumber);
+        }
     }
 }
