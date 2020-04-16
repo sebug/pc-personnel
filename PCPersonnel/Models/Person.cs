@@ -56,5 +56,13 @@ namespace PCPersonnel.Models
                     String.IsNullOrWhiteSpace(this.LastName);
             }
         }
+
+        public string DetailsLink
+        {
+            get
+            {
+                return "/Person?avsNumber=" + this.AVSNumber;
+            }
+        }
     }
 }

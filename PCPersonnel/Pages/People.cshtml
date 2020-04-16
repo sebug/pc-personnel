@@ -1,0 +1,28 @@
+﻿@page
+@model PCPersonnel.Pages.PeopleModel
+@{
+}
+@if (this.Model.People != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Mission</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in this.Model.People)
+            {
+                <tr>
+                    <td>@person.LastName</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.Mission</td>
+                    <td><a href="@person.DetailsLink">Détail</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
