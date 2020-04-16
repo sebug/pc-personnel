@@ -61,6 +61,72 @@
                     <dt>Fonction</dt>
                     <dd>@this.Model.Person.Function</dd>
                 }
+                <dt>EM?</dt>
+                @if (this.Model.Person.IsEM)
+                {
+                    <dd>Oui</dd>
+                }
+                else
+                {
+                    <dd>Non</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.InternalDomain))
+                {
+                    <dt>Domaine Interne</dt>
+                    <dd>@this.Model.Person.InternalDomain</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Classification))
+                {
+                    <dt>Classification selon GE</dt>
+                    <dd>@this.Model.Person.Classification</dd>
+                }
+            </dl>
+        </section>
+        <section>
+            <h2>Mission</h2>
+            <dl>
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Mission))
+                {
+                    <dt>Mission</dt>
+                    <dd>@this.Model.Person.Mission</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.PlaceOfConvocation))
+                {
+                    <dt>Lieu de convocation</dt>
+                    <dd>@this.Model.Person.PlaceOfConvocation</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.MissionResponsible))
+                {
+                    <dt>Chef mission</dt>
+                    <dd>@this.Model.Person.MissionResponsible</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.SecondaryMissionResponsible))
+                {
+                    <dt>Suppléant chef mission</dt>
+                    <dd>@this.Model.Person.SecondaryMissionResponsible</dd>
+                }
+            </dl>
+        </section>
+        <section>
+            <h2>Autre</h2>
+            <dl>
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.KitchenInfo))
+                {
+                    <dt>Info cuisine</dt>
+                    <dd>@this.Model.Person.KitchenInfo</dd>
+                }
+                @if (this.Model.Person.HasDriversLicense.HasValue)
+                {
+                    <dt>Permis de conduire</dt>
+                    @if (this.Model.Person.HasDriversLicense.Value)
+                    {
+                        <dd>Oui</dd>
+                    }
+                    else
+                    {
+                        <dd>Non</dd>
+                    }
+                }
             </dl>
         </section>
     </main>
