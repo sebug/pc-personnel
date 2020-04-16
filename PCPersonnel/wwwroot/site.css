@@ -1,3 +1,26 @@
 ﻿body {
     font-family: sans-serif;
 }
+
+main.person-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+main.person-details section {
+    grid-column: auto;
+}
+
+main.person-details dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+main.person-details dt {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+main.person-details dd {
+    grid-column: 2;
+}

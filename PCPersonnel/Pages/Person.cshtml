@@ -7,7 +7,61 @@
     <header>
         <h1>@this.Model.Person.FirstName @this.Model.Person.LastName</h1>
     </header>
-    <body>
-
-    </body>
+    <main class="person-details">
+        <section>
+            <h2>Coordonnées</h2>
+            <dl>
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.PhoneNumber))
+                {
+                    <dt>Numéro tel.</dt>
+                    <dd>@this.Model.Person.PhoneNumber</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Email))
+                {
+                    <dt>Email</dt>
+                    <dd>@this.Model.Person.Email</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.AVSNumber))
+                {
+                    <dt>Numéro AVS</dt>
+                    <dd>@this.Model.Person.AVSNumber</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.ZipCode))
+                {
+                    <dt>Code postal</dt>
+                    <dd>@this.Model.Person.ZipCode</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.City))
+                {
+                    <dt>Lieu</dt>
+                    <dd>@this.Model.Person.City</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Canton))
+                {
+                    <dt>Canton</dt>
+                    <dd>@this.Model.Person.Canton</dd>
+                }
+            </dl>
+        </section>
+        <section>
+            <h2>Fonction</h2>
+            <dl>
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Rank))
+                {
+                    <dt>Grade</dt>
+                    <dd>@this.Model.Person.Rank</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Assignment))
+                {
+                    <dt>Affectation</dt>
+                    <dd>@this.Model.Person.Assignment</dd>
+                }
+                @if (!String.IsNullOrWhiteSpace(this.Model.Person.Function))
+                {
+                    <dt>Fonction</dt>
+                    <dd>@this.Model.Person.Function</dd>
+                }
+            </dl>
+        </section>
+    </main>
 }
