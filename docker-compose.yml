@@ -15,9 +15,24 @@ services:
       - "5432:5432"
     env_file:
       - ./database.env
+    networks:
+      - postgres
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4@sha256:17d0443fc8ece58f70e8d5b1ff4aa97b04235b43174c571da937b7a888a87826
+    env_file:
+      - ./pgadmin_defaults.env
+    networks:
+      - postgres
+    ports:
+      - "9086:80"
+
+networks:
+  postgres:
+    driver: bridge
+      
 volumes:
   db-data:
     driver: local
