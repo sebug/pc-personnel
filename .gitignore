@@ -412,7 +412,7 @@ secrets.json
 client/message-log/Dockerfile
 
 # Environment variables
-messagelogclient.env
+connectionstring.env
 database.env
 
 02.initialdata.sql

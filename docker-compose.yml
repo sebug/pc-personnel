@@ -3,10 +3,23 @@ version: '3.4'
 services:
   pcpersonnel:
     image: sebug/pc-personnel:490
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+    env_file:
+      - ./pcpersonnel.env
+      - ./connectionstring.env
     ports:
       - "9085:80"
+
+  postgresql:
+    image: sebug/postgresql-pcpersonnel:492
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./database.env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+    driver: local
 
 
