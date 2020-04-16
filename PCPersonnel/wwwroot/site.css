@@ -11,6 +11,11 @@ main.person-details section {
     grid-column: auto;
 }
 
+main.person-details section.presence {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
 main.person-details dl {
     display: grid;
     grid-template-columns: auto 1fr;
