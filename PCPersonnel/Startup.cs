@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +31,12 @@ namespace PCPersonnel
             services.AddControllers();
             services.AddRazorPages();
 
+            services.AddDbContext<VehicleContext>(options =>
+            {
+                options.UseNpgsql(Configuration["ConnectionString"]);
+            });
+
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
             services.AddSingleton<IExcelFileRepository, InMemoryExcelFileRepository>();
             services.AddSingleton<IPersonRepository, PersonRepository>();
             services.AddTransient<IStatsService, StatsService>();
