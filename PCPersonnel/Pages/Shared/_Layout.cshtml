@@ -1,7 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>PC Personnel</title>
+    <title>
+    @if (this.ViewData.ContainsKey("title"))
+    {
+        @this.ViewData["title"];
+    } else
+    {
+        this.WriteLiteral("PC Personnel");
+    }
+    </title>
     <link rel="stylesheet" href="site.css" />
 </head>
 <body>

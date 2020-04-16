@@ -23,7 +23,11 @@ namespace PCPersonnel.Pages
         public void OnGet(string avsNumber)
         {
             this.Person = this._personRepository.GetByAVSNumber(avsNumber);
-
+            if (this.Person != null)
+            {
+                this.ViewData["title"] = this.Person.FirstName + " " +
+                    this.Person.LastName;
+            }
         }
     }
 }
