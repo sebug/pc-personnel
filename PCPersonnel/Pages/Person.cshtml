@@ -1,0 +1,10 @@
+﻿@page
+@model PCPersonnel.Pages.PersonModel
+@{
+}
+@if (this.Model.Person != null)
+{
+    <header>
+        <h1>@this.Model.Person.FirstName @this.Model.Person.LastName</h1>
+    </header>
+}
