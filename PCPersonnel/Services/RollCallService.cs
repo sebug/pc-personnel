@@ -51,5 +51,38 @@ namespace PCPersonnel.Services
 
             return result;
         }
+
+        public RollCallOptions GetRollCallOptions(DateTime date)
+        {
+            var result = new RollCallOptions();
+            result.Date = date;
+
+            var people = this._personRepository.GetAll();
+            if (people == null)
+            {
+                throw new Exception("Could not fetch people for roll call");
+            }
+
+            var rollCallPeople =
+                people.Where(p => p.Presences != null).Select(p =>
+                new
+                {
+                    Person = p,
+                    PresenceEntry = p.Presences.FirstOrDefault(presence =>
+                presence.Called && presence.Date == date &&
+                p.PlaceOfConvocation != null)
+                })
+                .Where(o => o.PresenceEntry != null)
+                .ToList();
+            var options = rollCallPeople.GroupBy(o => o.Person.PlaceOfConvocation)
+                .Select(g => new RollCallOption
+                {
+                    PlaceOfEntry = g.Key
+                }).ToList();
+
+            result.Options = options;
+
+            return result;
+        }
     }
 }
