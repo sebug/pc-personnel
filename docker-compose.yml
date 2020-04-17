@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   pcpersonnel:
-    image: sebug/pc-personnel:494
+    image: sebug/pc-personnel:507
     env_file:
       - ./pcpersonnel.env
       - ./connectionstring.env
@@ -12,7 +12,7 @@ services:
       - "9085:80"
 
   postgresql:
-    image: sebug/postgresql-pcpersonnel:492
+    image: sebug/postgresql-pcpersonnel:507
     ports:
       - "5432:5432"
     env_file:
