@@ -1,0 +1,34 @@
+﻿@page
+@model PCPersonnel.Pages.RollCallModel
+@{
+}
+@if (this.Model.RollCall != null)
+{
+    <header>
+        <h1>Liste d'appel - @this.Model.RollCall.Entry le @this.Model.RollCall.Date.ToString("dd.MM.yyyy")</h1>
+    </header>
+    <main>
+        @if (this.Model.RollCall.Presences != null)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Présent?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var presence in this.Model.RollCall.Presences)
+                    {
+                        <tr>
+                            <td>@presence.LastName</td>
+                            <td>@presence.FirstName</td>
+                            <td>@presence.Presence</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </main>
+}
