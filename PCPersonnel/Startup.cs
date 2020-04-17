@@ -40,7 +40,7 @@ namespace PCPersonnel
             services.AddSingleton<IExcelFileRepository, InMemoryExcelFileRepository>();
             services.AddSingleton<IPersonRepository, PersonRepository>();
             services.AddTransient<IStatsService, StatsService>();
-
+            services.AddTransient<IRollCallService, RollCallService>();
             
         }
 
