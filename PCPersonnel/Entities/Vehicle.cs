@@ -9,5 +9,6 @@ namespace PCPersonnel.Entities
         public int VehicleID { get; set; }
         public string Code { get; set; }
         public string Mission { get; set; }
+        public string VehicleType { get; set; }
     }
 }

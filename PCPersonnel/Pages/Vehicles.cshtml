@@ -1,0 +1,31 @@
+﻿@page
+@model PCPersonnel.Pages.VehiclesModel
+@{
+}
+@if (this.Model.Vehicles != null)
+{
+    <header>
+        <h1>Véhicules</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Véhicule</th>
+                    <th>Type</th>
+                    <th>Mission</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in this.Model.Vehicles)
+                {
+                    <tr>
+                        <td>@vehicle.Code</td>
+                        <td>@vehicle.VehicleType</td>
+                        <td>@vehicle.Mission</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+}
