@@ -38,3 +38,11 @@ main.stats {
 main.stats section {
     grid-column: auto;
 }
+
+.rollcall td, .rollcall th {
+    border: 1px solid black;
+}
+
+.rollcall table {
+    border-collapse: collapse;
+}
