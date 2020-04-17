@@ -80,6 +80,13 @@ namespace PCPersonnel.Services
                     PlaceOfEntry = g.Key
                 }).ToList();
 
+            foreach (var opt in options)
+            {
+                opt.RollCallLink = "/RollCall?date=" +
+                    result.Date.ToString("yyyy-MM-dd") +
+                    "&placeOfEntry=" + opt.PlaceOfEntry;
+            }
+
             result.Options = options;
 
             return result;

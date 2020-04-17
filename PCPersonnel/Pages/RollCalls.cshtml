@@ -1,0 +1,21 @@
+﻿@page
+@model PCPersonnel.Pages.RollCallsModel
+@{
+}
+@if (this.Model.RollCallOptions != null)
+{
+    <header>
+        <h1>Listes d'appel - @this.Model.RollCallOptions.Date.ToString("dd.MM.yyyy")</h1>
+    </header>
+    <main>
+        @if (this.Model.RollCallOptions.Options != null)
+        {
+            <ul>
+            @foreach (var opt in this.Model.RollCallOptions.Options)
+            {
+                <li><a href="@opt.RollCallLink">@opt.PlaceOfEntry</a></li>
+            }
+            </ul>
+        }
+    </main>
+}
