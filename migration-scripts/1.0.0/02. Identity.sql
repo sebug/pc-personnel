@@ -91,6 +91,20 @@ PRIMARY KEY ("UserId", "RoleId")
 );
 END IF;
 
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetUserTokens') THEN
+
+CREATE TABLE "AspNetUserTokens" (
+"UserId" VARCHAR(256) NOT NULL REFERENCES "AspNetUsers" ("Id"),
+"LoginProvider" VARCHAR(128) NOT NULL,
+"Name" VARCHAR(128) NOT NULL,
+"Value" VARCHAR(1024) NOT NULL,
+PRIMARY KEY ("UserId", "LoginProvider", "Name")
+);
+END IF;
+
 
 END;
 $$;
