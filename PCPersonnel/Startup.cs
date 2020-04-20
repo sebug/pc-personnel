@@ -46,7 +46,8 @@ namespace PCPersonnel
                 options.UseNpgsql(Configuration["ConnectionString"]);
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -90,6 +91,7 @@ namespace PCPersonnel
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
