@@ -79,6 +79,18 @@ PRIMARY KEY ("LoginProvider", "ProviderKey")
 );
 END IF;
 
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetUserRoles') THEN
+
+CREATE TABLE "AspNetUserRoles" (
+"UserId" VARCHAR(256) NOT NULL REFERENCES "AspNetUsers" ("Id"),
+"RoleId" VARCHAR(256) NOT NULL REFERENCES "AspNetRoles" ("Id"),
+PRIMARY KEY ("UserId", "RoleId")
+);
+END IF;
+
 
 END;
 $$;
