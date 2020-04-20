@@ -41,9 +41,6 @@ namespace PCPersonnel
                 options.UseNpgsql(Configuration["ConnectionString"]);
             });
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddDbContext<VehicleContext>(options =>
             {
                 options.UseNpgsql(Configuration["ConnectionString"]);
