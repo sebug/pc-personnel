@@ -37,6 +37,20 @@ CREATE TABLE "AspNetUsers" (
 );
 END IF;
 
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetRoleClaims') THEN
+
+CREATE SEQUENCE aspnet_role_claims_sequence;
+CREATE TABLE "AspNetRoleClaims" (
+"Id" INT NOT NULL DEFAULT nextval('aspnet_role_claims_sequence') PRIMARY KEY,
+"RoleId" VARCHAR(256) NOT NULL REFERENCES "AspNetRoles" ("Id"),
+"ClaimType" VARCHAR(256) NULL,
+"ClaimValue" VARCHAR(1024) NULL
+);
+END IF;
+
 
 END;
 $$;
