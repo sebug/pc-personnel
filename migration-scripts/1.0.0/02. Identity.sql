@@ -65,6 +65,20 @@ CREATE TABLE "AspNetUserClaims" (
 );
 END IF;
 
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetUserLogins') THEN
+
+CREATE TABLE "AspNetUserLogins" (
+"LoginProvider" VARCHAR(128) NOT NULL,
+"ProviderKey" VARCHAR(128) NOT NULL,
+"ProviderDisplayName" VARCHAR(512) NULL,
+"UserId" VARCHAR(256) NOT NULL REFERENCES "AspNetUsers" ("Id"),
+PRIMARY KEY ("LoginProvider", "ProviderKey")
+);
+END IF;
+
 
 END;
 $$;
