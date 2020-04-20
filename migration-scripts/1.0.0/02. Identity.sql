@@ -1,0 +1,42 @@
+do $$
+BEGIN
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetRoles') THEN
+
+CREATE TABLE "AspNetRoles" (
+"Id" VARCHAR(256) NOT NULL PRIMARY KEY,
+"Name" VARCHAR(256) NULL,
+"NormalizedName" VARCHAR(256) NULL,
+"ConcurrencyStamp" VARCHAR(256) NULL
+);
+END IF;
+
+IF NOT EXISTS (
+   SELECT *
+   FROM INFORMATION_SCHEMA.TABLES
+   WHERE TABLE_NAME = 'AspNetUsers') THEN
+
+CREATE TABLE "AspNetUsers" (
+"Id" VARCHAR(256) NOT NULL PRIMARY KEY,
+"UserName" VARCHAR(256) NULL,
+"NormalizedUserName" VARCHAR(256) NULL,
+"Email" VARCHAR(256) NULL,
+"NormalizedEmail" VARCHAR(256) NULL,
+"EmailConfirmed" BOOLEAN NOT NULL,
+"PasswordHash" VARCHAR(256) NULL,
+"SecurityStamp" VARCHAR(256) NULL,
+"ConcurrencyStamp" VARCHAR(256) NULL,
+"PhoneNumber" VARCHAR(256) NULL,
+"PhoneNumberConfirmed" BOOLEAN NOT NULL,
+"TwoFactorEnabled" BOOLEAN NOT NULL,
+"LockoutEnd" TIMESTAMP WITH TIME ZONE NULL,
+"LockoutEnabled" BOOLEAN NOT NULL,
+"AccessFailedCount" INT NOT NULL
+);
+END IF;
+
+
+END;
+$$;

@@ -11,6 +11,7 @@ using PCPersonnel.Repositories;
 
 namespace PCPersonnel.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private IExcelFileRepository ExcelFileRepository { get; }
