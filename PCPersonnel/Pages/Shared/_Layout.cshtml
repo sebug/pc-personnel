@@ -10,13 +10,16 @@
         this.WriteLiteral("PC Personnel");
     }
     </title>
-    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
     <nav>
         <partial name="_LoginPartial" />
     </nav>
     @RenderBody()
-    @RenderSection("Scripts")
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts")
+    }
 </body>
 </html>
